@@ -163,6 +163,12 @@
 (after! lsp-ui
   (setq! lsp-ui-doc-delay 0.0))
 
+
+;; Read env vars from .profile/.bash_profile/.bashrc
+(use-package! exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
+
 (use-package! org-ai
   :ensure t
   :load-path (lambda () "~/.config/emacs/.local/straight/repos/org-ai")
@@ -170,10 +176,14 @@
   (add-hook 'org-mode-hook #'org-ai-mode)
   (org-ai-global-mode) ; installs global keybindings on C-c M-a
   :config
-  (setq org-ai-openai-api-token "YOUR-TOKEN")
+  (setq org-ai-openai-api-token (getenv "CHATGPT_API_KEY"))
   (setq org-ai-default-chat-model "gpt-4") ; if you are on the gpt-4 beta:
   (org-ai-install-yasnippets)
   )
+
+(use-package! gptel
+  :config
+  (setq! gptel-api-key (getenv "CHATGPT_API_KEY")))
 ;; (use-package! org-ai
 ;;   :ensure t
 ;;   :commands (org-ai-mode
@@ -190,6 +200,14 @@
 ;; (after! org-ai
 ;;   (setq org-ai-default-chat-model "gpt-4"))
 ;; (add-hook! 'org-mode-hook #'org-ai-mode t)
+
+;; (global-set-key )
+(map! :leader
+      (:prefix ("j" . "AI")
+       :desc "gptel"
+       "f" #'gptel-send
+       "p" #'org-ai-prompt))
+
 
 
 

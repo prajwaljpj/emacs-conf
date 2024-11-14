@@ -48,3 +48,13 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
+
+(package! org-ai
+  :recipe (:host github :repo "rksm/org-ai"
+           :files ("*.el" "README.md" "snippets")))
+
+(package! gptel)
+
+(package! org-roam-ui)
+(package! org-ref)
+(package! exec-path-from-shell)
