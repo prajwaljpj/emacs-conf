@@ -58,3 +58,6 @@
 (package! org-roam-ui)
 (package! org-ref)
 (package! exec-path-from-shell)
+
+(package! copilot
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
